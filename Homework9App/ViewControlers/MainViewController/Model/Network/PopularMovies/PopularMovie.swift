@@ -1,8 +1,9 @@
 
 import Foundation
-struct JsonResult: Codable {
+
+struct PopularMovie: Codable {
     let page : Int?
-    let results : [Result]?
+    let results : [Movies]?
     let totalPages : Int?
     let totalResults : Int?
 
@@ -17,9 +18,8 @@ struct JsonResult: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         page = try values.decodeIfPresent(Int.self, forKey: .page)
-        results = try values.decodeIfPresent([Result].self, forKey: .results)
+        results = try values.decodeIfPresent([Movies].self, forKey: .results)
         totalPages = try values.decodeIfPresent(Int.self, forKey: .totalPages)
         totalResults = try values.decodeIfPresent(Int.self, forKey: .totalResults)
     }
-
 }

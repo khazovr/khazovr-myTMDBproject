@@ -1,20 +1,22 @@
 
 import Foundation
-struct Result : Codable {
-    let backdropPath : String?
-    let firstAirDate : String?
-    let genreIds : [Int]?
-    let originalLanguage : String?
+import RealmSwift
+
+struct Movies : Codable {
+    var backdropPath : String?
+    var firstAirDate : String?
+    var genreIds : [Int]?
+    var originalLanguage : String?
     let posterPath : String?
     let title : String?
-    let originCountry : [String]?
-    let name : String?
-    let voteCount : Int?
-    let voteAverage : Double?
-    let overview : String?
-    let id : Int?
+    var originCountry : [String]?
+    var name : String?
+    var voteCount : Int?
+    var voteAverage : Double?
+    var overview : String?
+    var id : Int?
     let popularity : Double?
-    let mediaType : String?
+    var mediaType : String?
 
     enum CodingKeys: String, CodingKey {
 
@@ -52,4 +54,9 @@ struct Result : Codable {
         mediaType = try values.decodeIfPresent(String.self, forKey: .mediaType)
     }
 
+    init(from movieRealm: WatchLaterMovieRealm) {
+        self.title = movieRealm.movieTitle
+        self.popularity = movieRealm.popularity
+        self.posterPath = movieRealm.posterPath
+    }
 }
