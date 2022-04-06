@@ -7,19 +7,19 @@ struct Movies : Codable {
     var firstAirDate : String?
     var genreIds : [Int]?
     var originalLanguage : String?
-    let posterPath : String?
-    let title : String?
+    var posterPath : String?
+    var title : String?
     var originCountry : [String]?
     var name : String?
     var voteCount : Int?
     var voteAverage : Double?
     var overview : String?
     var id : Int?
-    let popularity : Double?
+    var popularity : Double?
     var mediaType : String?
-
+    
     enum CodingKeys: String, CodingKey {
-
+        
         case backdropPath = "backdrop_path"
         case firstAirDate = "first_air_date"
         case genreIds = "genre_ids"
@@ -35,7 +35,7 @@ struct Movies : Codable {
         case popularity = "popularity"
         case mediaType = "media_type"
     }
-
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
@@ -53,7 +53,7 @@ struct Movies : Codable {
         popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)
         mediaType = try values.decodeIfPresent(String.self, forKey: .mediaType)
     }
-
+    
     init(from movieRealm: WatchLaterMovieRealm) {
         self.title = movieRealm.movieTitle
         self.popularity = movieRealm.popularity

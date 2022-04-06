@@ -13,4 +13,5 @@ class WatchLaterMovieRealm: Object {
     @objc dynamic var movieTitle = ""
     @objc dynamic var popularity: Double = 0.0
     @objc dynamic var posterPath = ""
+    
 }

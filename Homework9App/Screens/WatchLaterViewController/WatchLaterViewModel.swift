@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class WatchLaterViewModel {
     
@@ -15,5 +16,13 @@ class WatchLaterViewModel {
         DataManager.shared.getAllMovies(completion: { movies in
             self.movies = movies
         })
+    }
+    
+    func deletedMovieFromRealm(_ movie: Movies?, completion: @escaping(() -> ())) {
+
+        guard let movie = movie else {
+            return
+        }
+        DataManager.shared.deleteMovie(movie, completion: completion)
     }
 }

@@ -19,18 +19,15 @@ class ActorCollectionViewCell: UICollectionViewCell {
         cornerRaduis()
     }
     
-    //Static func
     static func nib() -> UINib {
         return UINib(nibName: self.identifier, bundle: nil)
     }
     
-    //Public func
     public func configureWith(actorName: String?, imagePath: String?) {
         actorNameLabel.text = actorName
         loadImage(imagePath: imagePath)
     }
     
-    //Private func
     private func cornerRaduis() {
         self.actorPathImageView.layer.cornerRadius = self.actorPathImageView.frame.height / 2
     }

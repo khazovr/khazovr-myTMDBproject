@@ -8,7 +8,6 @@
 import Foundation
 
 class DetailViewModel {
-    
     var movie: Movies?
 }
 

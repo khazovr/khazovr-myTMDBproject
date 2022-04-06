@@ -31,6 +31,7 @@ struct Constant {
     
     struct savedMessage {
         static let saved = "Saved!"
+        static let deleted = "Succesfully deleted"
         static let done = "OK"
     }
 }

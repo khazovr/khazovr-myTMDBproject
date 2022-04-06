@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var posterTitleLabel: UILabel!

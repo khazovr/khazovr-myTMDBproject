@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
     
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var posterDescriptionLabel: UILabel!

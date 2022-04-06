@@ -10,7 +10,7 @@ import Alamofire
 import SDWebImage
 import RealmSwift
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
-        //                        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +28,6 @@ class MainViewController: UIViewController {
         loadData()
     }
     
-    //Functions
     private func registerCell() {
         collectionView.register(ActorCollectionViewCell.nib(), forCellWithReuseIdentifier: ActorCollectionViewCell.identifier)
     }
@@ -65,10 +64,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = String(describing: CustomTableViewCell.self)
+        let cellIdentifier = String(describing: MainTableViewCell.self)
         let movies = self.mainViewModel.movies[indexPath.row]
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? CustomTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? MainTableViewCell
         else {
             return UITableViewCell()
         }

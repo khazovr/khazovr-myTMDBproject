@@ -8,9 +8,11 @@
 import UIKit
 import RealmSwift
 
-class WatchLaterViewController: UIViewController {
+class WatchLaterViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    let realm = try? Realm()
     
     private var watchLaterViewModel: WatchLaterViewModel = WatchLaterViewModel()
     
@@ -26,6 +28,21 @@ class WatchLaterViewController: UIViewController {
         self.watchLaterViewModel.getAllMovies {
             self.tableView.reloadData()
         }
+    }
+    
+    private func deleteMovieFromRealm(movie: Movies?) {
+        
+        self.watchLaterViewModel.deletedMovieFromRealm(movie, completion: {
+            
+            let alert = UIAlertController(title: Constant.savedMessage.deleted,
+                                          message: nil,
+                                          preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: Constant.savedMessage.done,
+                                          style: UIAlertAction.Style.default,
+                                          handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
 }
 
@@ -53,23 +70,21 @@ extension WatchLaterViewController: UITableViewDelegate, UITableViewDataSource {
             cell.posterImageView.sd_setImage(with: URL(string: pathString),
                                              placeholderImage: UIImage.init(systemName: "user"))
         }
+        
         cell.posterTitleLabel.textColor = .white
         cell.voteAvarageLabel.textColor = .red
         cell.backgroundColor = .black
         tableView.backgroundColor = .black
         return cell
     }
+//        Вот здесь я столкнулся с этими трудностями
+        
+        func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+            let editingRow = watchLaterViewModel.movies[indexPath.row]
     
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//
-//        let editingRow = watchLaterViewModel.movies[indexPath.row]
-//
-//        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { _,_ in
-//            try? self.realm?.write {
-//            self.realm?.delete(editingRow)
-//            tableView.reloadData()
-//            }
-//        }
-//        return [deleteAction]
-//    }
+            let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { [weak self] _,_ in
+//                self?.deleteMovieFromRealm(movie: editingRow)
+            }
+            return [deleteAction]
+        }
 }
